@@ -36,7 +36,7 @@ datos_grafico = car_data.groupby(['marca','type']).size().reset_index(name='coun
 
 # Ordenar por precio para el efecto de ascenso/descenso
 datos_grafico = datos_grafico.sort_values(by='marca', ascending=True)
-
+#codigo del grafico
 fig_bar = px.bar(
     datos_grafico, 
     x="marca", 
@@ -84,6 +84,7 @@ fig_hist.update_xaxes(
     dtick=20, # forsamos el salto de las etiquetas cada 20 unidades 
     tick0=2000 # punto de referencia para que los saltos sean(1980, 2000, 2020...)
 )
+# mostramos en streamlit
 st.plotly_chart(fig_hist,use_container_width=True)
 
 #----SECCION 4: COMPARADOR DE PRECIOS MARCAS----
@@ -91,16 +92,16 @@ st.plotly_chart(fig_hist,use_container_width=True)
 # Encabezado  
 
 st.title('💵Comparacion de precios de distribucion entre marcas')
-
+# filtramos las marcas disponibles 
 marcas_disponibles= car_data['marca'].unique()
-
+# selector de m,arca #1
 marca_seleccionada= st.selectbox("Selecciona la primer marca:", marcas_disponibles)
-
+# selector de marca #2
 marca_seleccionada2= st.selectbox('Selecciona la segunda marca:', marcas_disponibles)
-
+# filtro de marcas seleccionadas 
 df_filtrado= car_data[car_data['marca'].isin([marca_seleccionada,marca_seleccionada2])]
 
-
+# Codigo del grafico
 fig_comp =px.histogram(
                        df_filtrado,
                        x= 'price',
@@ -111,14 +112,15 @@ fig_comp =px.histogram(
                        color_discrete_sequence=px.colors.qualitative.Pastel
 
     )
+# cambios en el eje y
 fig_comp.update_yaxes(
-                      dtick=10,
-                      tick0=0,
+                      dtick=10,# Forsamos el salto de las etiquetas cada 10 unidades 
+                      tick0=0,# punto de inicio de los saltos 
 )
-
+# mejoramos el diseño
 fig_comp.update_layout(
                        xaxis_title='Precio',
                        yaxis_title='Porcentage (%)'
 )
-
+# mostramos en streamlit
 st.plotly_chart(fig_comp,use_container_width=True)
