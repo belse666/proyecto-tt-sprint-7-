@@ -5,7 +5,7 @@ import numpy as np
 import plotly.express as px
 
 # Leer los datos del archivo CSV
-car_data= pd.read_csv('/home/abdel/tripletent/proyecto/proyecto-sprint-7-abdel-/vehicles_us.csv')
+car_data= pd.read_csv('vehicles_us.csv')
 
 # --- SECCIÓN 1: VISUALIZACIÓN DE TABLA ---
 
