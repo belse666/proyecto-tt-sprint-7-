@@ -10,12 +10,12 @@ car_data= pd.read_csv('/home/abdel/tripletent/proyecto/proyecto-sprint-7-abdel-/
 # --- SECCIÓN 1: VISUALIZACIÓN DE TABLA ---
 
 # Encabezado
-st.header('📊 Visor de Datos de Vehículos en Inventario')
+st.header('📊 Datos de Vehículos en Inventario')
 
-st.subheader('Explorador de Tabla')
+st.subheader('Explorador de datos')
 
 # Casilla de verificación para mostrar/ocultar el dataframe
-show_df = st.checkbox('Mostrar tabla de datos completa')
+show_df = st.checkbox('Mostrar tabla de datos')
 
 if show_df:
     st.write(car_data)
@@ -94,10 +94,12 @@ st.plotly_chart(fig_hist,use_container_width=True)
 st.title('💵Comparacion de precios de distribucion entre marcas')
 # filtramos las marcas disponibles 
 marcas_disponibles= car_data['marca'].unique()
+# agregamos none al principio de la lista 
+marcas_con_vacio= [None] + list(marcas_disponibles)
 # selector de m,arca #1
-marca_seleccionada= st.selectbox("Selecciona la primer marca:", marcas_disponibles)
+marca_seleccionada= st.selectbox("Selecciona la primer marca:", marcas_con_vacio,index=0)
 # selector de marca #2
-marca_seleccionada2= st.selectbox('Selecciona la segunda marca:', marcas_disponibles)
+marca_seleccionada2= st.selectbox('Selecciona la segunda marca:', marcas_con_vacio,index=0)
 # filtro de marcas seleccionadas 
 df_filtrado= car_data[car_data['marca'].isin([marca_seleccionada,marca_seleccionada2])]
 
